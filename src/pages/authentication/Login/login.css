@@ -1,0 +1,75 @@
+.heading {
+	background-color: #fff;
+}
+.login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 25rem;
+	padding: 30px 20px;
+	/* background-color: #fff; */
+}
+.col {
+	width: 60%;
+	margin: 20px 10px;
+	position: relative;
+}
+:focus {
+	outline: none;
+}
+input {
+	font: 15px/24px "Lato", Arial, sans-serif;
+	color: #333;
+	width: 100%;
+}
+.effect {
+	border: 0;
+	padding: 4px 0;
+	border-bottom: 1px solid #ccc;
+	background-color: #fff;
+}
+.effect ~ .focus-border {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background-color: #c4242b;
+	transition: 0.4s;
+}
+.effect:focus ~ .focus-border,
+.has-content.effect ~ .focus-border {
+	width: 100%;
+	transition: 0.4s;
+	left: 0;
+}
+.effect ~ label {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 9px;
+	color: #aaa;
+	/* background-color: #fff; */
+	transition: 0.3s;
+	z-index: -1;
+	letter-spacing: 0.5px;
+	pointer-events: none;
+}
+.effect:focus ~ label,
+.has-content.effect ~ label {
+	top: -16px;
+	font-size: 12px;
+	color: #c4242b;
+	transition: 0.3s;
+}
+.submitbtn {
+	width: 10rem;
+	padding: 8px 10px;
+	transition: all 0.3s ease-in-out;
+	border: none;
+	border-radius: 5px;
+}
+.submitbtn:hover {
+	background-color: #c4242b;
+}
