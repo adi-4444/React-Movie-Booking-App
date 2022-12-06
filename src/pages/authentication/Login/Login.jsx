@@ -1,46 +1,60 @@
 import React, { useState } from "react";
 import "./login.css";
+import { Link } from "react-router-dom";
 
-const Login = () => {
-	const [userId, setUserId] = useState("");
+function Login() {
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	const SubmitHandler = (e) => {
+	const loginHandler = (e) => {
 		e.preventDefault();
-		console.log({ userId, password });
+		console.log({ email, password });
 	};
 	return (
-		<div>
-			<form onSubmit={SubmitHandler} className='login-form'>
-				<h1 className='heading'>Login</h1>
-				<div className='col input-effect'>
-					<input
-						className='effect'
-						type='text'
-						placeholder=''
-						value={userId}
-						onChange={(e) => setUserId(e.target.value)}
-					/>
-					<label>User ID *</label>
-					<span className='focus-border'></span>
+		<div className='login-body'>
+			<h1>Welcome</h1>
+			<div className='login-wrapper'>
+				<div className='login-form-group'>
+					<h2>Login</h2>
+					<form onSubmit={loginHandler}>
+						<div className='form-group'>
+							<input
+								type='email'
+								className='form-control'
+								name='email *'
+								placeholder='Email'
+								autoFocus
+								required
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<label className='form-label'>Email *</label>
+						</div>
+
+						<div className='form-group'>
+							<input
+								type='password'
+								className='form-control'
+								name='password'
+								placeholder='Password'
+								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<label className='form-label'>Password *</label>
+						</div>
+
+						<div className='login-btn'>
+							<input type='submit' value='Login' />
+							<p>
+								Don't have an account ?{" "}
+								<Link to='/Signup'>Signup</Link>
+							</p>
+						</div>
+					</form>
 				</div>
-				<div className='col input-effect'>
-					<input
-						className='effect'
-						type='password'
-						placeholder=''
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<label>Password *</label>
-					<span className='focus-border'></span>
-				</div>
-				<div>
-					<input className='submitbtn' type='submit' />
-				</div>
-			</form>
+			</div>
 		</div>
 	);
-};
+}
 
 export default Login;

@@ -1,75 +1,91 @@
-.heading {
-	background-color: #fff;
-}
-.login-form {
+.login-body {
+	background-color: #f6f7f9;
+	height: 89.99vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	width: 25rem;
-	padding: 30px 20px;
-	/* background-color: #fff; */
 }
-.col {
-	width: 60%;
-	margin: 20px 10px;
-	position: relative;
+.login-body > h1 {
+	margin-bottom: 25px;
 }
-:focus {
-	outline: none;
-}
-input {
-	font: 15px/24px "Lato", Arial, sans-serif;
-	color: #333;
-	width: 100%;
-}
-.effect {
-	border: 0;
-	padding: 4px 0;
-	border-bottom: 1px solid #ccc;
+
+.login-wrapper {
 	background-color: #fff;
+	width: 350px;
+	padding: 15px 1px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-.effect ~ .focus-border {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 2px;
-	background-color: #c4242b;
-	transition: 0.4s;
+.login-form-group > h2 {
+	text-align: center;
+	margin: 1em;
+	transition: all 0.3s;
 }
-.effect:focus ~ .focus-border,
-.has-content.effect ~ .focus-border {
-	width: 100%;
-	transition: 0.4s;
-	left: 0;
+.form-group {
+	margin-bottom: 1em;
+	transition: all 0.3s;
 }
-.effect ~ label {
-	position: absolute;
-	left: 0;
-	width: 100%;
-	top: 9px;
+.form-label {
+	font-size: 1em;
 	color: #aaa;
-	/* background-color: #fff; */
-	transition: 0.3s;
-	z-index: -1;
-	letter-spacing: 0.5px;
+	display: block;
+	opacity: 1;
+	transform: translateY(-1.55em);
+	transform-origin: 0 0;
+	transition: all 0.3s ease-in-out;
 	pointer-events: none;
 }
-.effect:focus ~ label,
-.has-content.effect ~ label {
-	top: -16px;
-	font-size: 12px;
-	color: #c4242b;
-	transition: 0.3s;
+.form-control {
+	box-shadow: none;
+	background-color: rgba(0, 0, 0, 0.02);
+	border-radius: 0px;
+	border-color: #ccc;
+	background-color: transparent;
+	border-style: none none solid none;
+	width: 250px;
+	transition: all 0.5s;
+	padding: 5px;
+	caret-color: #f84464;
 }
-.submitbtn {
-	width: 10rem;
-	padding: 8px 10px;
-	transition: all 0.3s ease-in-out;
+.form-control::placeholder {
+	color: transparent;
+}
+.form-control:focus {
+	box-shadow: none;
+	outline: none;
+	border-color: #f84464;
+}
+.form-control:focus + .form-label,
+.form-control:not(:placeholder-shown) + .form-label {
+	transform: translateY(-2.5em) scale(0.7);
+}
+.form-group:focus-within {
+	transform: scale(1.05, 1.05);
+}
+.login-btn > input {
+	width: 250px;
+	padding: 10px;
+	margin-bottom: 5px;
+	border-color: none;
 	border: none;
-	border-radius: 5px;
+	transition: all 0.5s ease-in-out;
 }
-.submitbtn:hover {
-	background-color: #c4242b;
+.login-btn > input:hover {
+	background-color: #f84464;
+	border-color: none;
+	cursor: pointer;
+	border: none;
+}
+.login-btn > p {
+	margin-top: 5px;
+	text-align: center;
+}
+
+.login-btn a {
+	cursor: pointer;
+	color: blue;
+	text-decoration: none;
 }
