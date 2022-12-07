@@ -5,7 +5,7 @@ const Signup = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [userId, setUserId] = useState("");
-	const [userType, SetUserType] = useState("CUSTOMER");
+	const [userType, setUserType] = useState("CUSTOMER");
 	const [password, setPassword] = useState("");
 	const [confirmpassword, setConfirmPassword] = useState("");
 
@@ -68,15 +68,17 @@ const Signup = () => {
 								<select
 									value={userType}
 									onChange={(e) =>
-										SetUserType(e.target.value)
+										setUserType(e.target.value)
 									}
 									required
 								>
 									<option value='' selected disabled hidden>
 										Choose
 									</option>
-									<option value='CLIENT'>Client</option>
-									<option value='CUSTOMER'>Customer</option>
+									<option eventKey='CUSTOMER'>
+										Customer
+									</option>
+									<option eventKey='CLIENT'>Client</option>
 								</select>
 							</div>
 
