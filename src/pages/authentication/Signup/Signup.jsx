@@ -148,13 +148,8 @@ const Signup = () => {
 									onChange={signupDataChangeHandler}
 									required
 								>
-									<option value='' selected disabled hidden>
-										Choose
-									</option>
-									<option eventKey='CUSTOMER'>
-										Customer
-									</option>
-									<option eventKey='CLIENT'>Client</option>
+									<option value='CUSTOMER'>Customer</option>
+									<option value='CLIENT'>Client</option>
 								</select>
 							</div>
 
