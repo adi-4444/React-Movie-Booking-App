@@ -1,13 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
-	const [email, setEmail] = useState("");
+	const [userId, setUserId] = useState("");
 	const [password, setPassword] = useState("");
+	const [message, setMessage] = useState("");
+	const [validateMessage, setValidateMessage] = useState("");
+	const navigate = useNavigate();
+
+	const redirectUrl = () => {
+		navigate("/");
+	};
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			redirectUrl();
+		}
+		// eslint-disable-next-line
+	}, []);
+	const clearStates = () => {
+		setUserId("");
+		setPassword("");
+		setMessage("");
+		setValidateMessage("");
+	};
+	const signupFunction = () => {
+		clearStates();
+	};
+	const validateData = (data) => {
+		if (data.userId.length < 5 || data.userId.length > 10) {
+			setValidateMessage("UserID will be 5 to 10 characters");
+			return false;
+		}
+		if (data.userId.includes(" ")) {
+			setValidateMessage("UserID will not contain spaces");
+			return false;
+		}
+		if (data.password.length < 6 || data.password.length > 10) {
+			setValidateMessage("Password will be 6 to 10 characters");
+			return false;
+		}
+		if (data.password.includes(" ")) {
+			setValidateMessage("Password will not contain spaces");
+			return false;
+		}
+		return true;
+	};
+
 	const loginHandler = (e) => {
 		e.preventDefault();
-		console.log({ email, password });
+		const data = { userId, password };
+		console.log("Signin Clicked entered data" + data);
+
+		if (!validateData(data)) {
+			return;
+		}
 	};
 	return (
 		<div className='login-body'>
@@ -24,8 +71,8 @@ function Login() {
 								placeholder='Email'
 								autoFocus
 								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								value={userId}
+								onChange={(e) => setUserId(e.target.value)}
 							/>
 							<label className='form-label'>Email *</label>
 						</div>
@@ -42,12 +89,15 @@ function Login() {
 							/>
 							<label className='form-label'>Password *</label>
 						</div>
-
+						<div className='validate-msg'>{validateMessage}</div>
+						<div className='normal-msg'>{message}</div>
 						<div className='login-btn'>
 							<input type='submit' value='Login' />
 							<p>
 								Don't have an account ?{" "}
-								<Link to='/Signup'>Signup</Link>
+								<Link to='/Signup' onClick={signupFunction}>
+									Signup
+								</Link>
 							</p>
 						</div>
 					</form>

@@ -84,7 +84,16 @@
 	border-bottom: 0.5px solid #aaa;
 	font-size: 1.06rem;
 }
-
+.validate-msg {
+	color: red;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.normal-msg {
+	color: green;
+	text-align: center;
+	margin-bottom: 5px;
+}
 .signup_btn > input {
 	width: 250px;
 	padding: 10px;

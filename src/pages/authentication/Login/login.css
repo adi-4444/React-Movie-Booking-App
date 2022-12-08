@@ -65,6 +65,16 @@
 .form-group:focus-within {
 	transform: scale(1.05, 1.05);
 }
+.validate-msg {
+	color: red;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.normal-msg {
+	color: green;
+	text-align: center;
+	margin-bottom: 5px;
+}
 .login-btn > input {
 	width: 250px;
 	padding: 10px;

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./signup.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
 	const [name, setName] = useState("");
@@ -8,11 +9,87 @@ const Signup = () => {
 	const [userType, setUserType] = useState("CUSTOMER");
 	const [password, setPassword] = useState("");
 	const [confirmpassword, setConfirmPassword] = useState("");
+	const [message, setMessage] = useState("");
+	const [validateMessage, setValidateMessage] = useState("");
+	const navigate = useNavigate();
+
+	const redirectUrl = () => {
+		navigate("/");
+	};
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			redirectUrl();
+		}
+		// eslint-disable-next-line
+	}, []);
+	const clearStates = () => {
+		setName("");
+		setEmail("");
+		setUserId("");
+		setUserType("");
+		setPassword("");
+		setConfirmPassword("");
+		setMessage("");
+		setValidateMessage("");
+	};
+	const loginFunction = () => {
+		clearStates();
+	};
+	const signupDataChangeHandler = (e) => {
+		const name = e.target.name;
+		if (name === "name") {
+			setName(e.target.value);
+		} else if (name === "email") {
+			setEmail(e.target.value);
+		} else if (name === "userId") {
+			setUserId(e.target.value);
+		} else if (name === "userType") {
+			setUserType(e.target.value);
+		} else if (name === "password") {
+			setPassword(e.target.value);
+		}
+		setMessage("");
+		setValidateMessage("");
+	};
+	const validateData = (data) => {
+		if (data.userId.length < 5 || data.userId.length > 10) {
+			setValidateMessage("UserID should be 5 to 10 characters");
+			return false;
+		}
+		if (data.userId.includes(" ")) {
+			setValidateMessage("UserID should not contain spaces");
+			return false;
+		}
+		if (data.password.length < 6 || data.password.length > 10) {
+			setValidateMessage("Password should be 6 to 10 characters");
+			return false;
+		}
+		if (data.password.includes(" ")) {
+			setValidateMessage("Password should not contain spaces");
+			return false;
+		}
+		if (data.name.length < 5 || data.password.length > 10) {
+			setValidateMessage("Username should be 5 to 10 characters");
+			return false;
+		}
+		if (data.name.includes(" ")) {
+			setValidateMessage("Username should not contain spaces");
+			return false;
+		}
+		return true;
+	};
 
 	const signupHandler = (e) => {
 		e.preventDefault();
-		console.log({ name, email, userId, userType, password });
+		const data = { name, email, userId, userType, password };
+
+		console.log("Signin Clicked entered data");
+
+		if (!validateData(data)) {
+			return;
+		}
 		// api call to Signup a new user
+		console.log(data);
 	};
 
 	return (
@@ -32,7 +109,7 @@ const Signup = () => {
 									autoFocus
 									required
 									value={name}
-									onChange={(e) => setName(e.target.value)}
+									onChange={signupDataChangeHandler}
 								/>
 								<label className='form_label'>Name *</label>
 							</div>
@@ -41,24 +118,24 @@ const Signup = () => {
 								<input
 									type='text'
 									className='form_control'
-									name='email *'
-									placeholder='Email'
+									name='email'
+									placeholder='Email *'
 									required
 									value={email}
-									onChange={(e) => setEmail(e.target.value)}
+									onChange={signupDataChangeHandler}
 								/>
 								<label className='form_label'>Email *</label>
 							</div>
 
-							<div className='for_group'>
+							<div className='form_group'>
 								<input
 									type='text'
 									className='form_control'
-									name='userId *'
-									placeholder='userId'
+									name='userId'
+									placeholder='userId *'
 									required
 									value={userId}
-									onChange={(e) => setUserId(e.target.value)}
+									onChange={signupDataChangeHandler}
 								/>
 								<label className='form_label'>User ID *</label>
 							</div>
@@ -67,9 +144,8 @@ const Signup = () => {
 								<label>Register as * </label>
 								<select
 									value={userType}
-									onChange={(e) =>
-										setUserType(e.target.value)
-									}
+									name='userType'
+									onChange={signupDataChangeHandler}
 									required
 								>
 									<option value='' selected disabled hidden>
@@ -90,9 +166,7 @@ const Signup = () => {
 									placeholder='Password'
 									required
 									value={password}
-									onChange={(e) =>
-										setPassword(e.target.value)
-									}
+									onChange={signupDataChangeHandler}
 								/>
 								<label className='form_label'>Password *</label>
 							</div>
@@ -142,7 +216,10 @@ const Signup = () => {
 									""
 								)}
 							</div>
-
+							<div className='validate-msg'>
+								{validateMessage}
+							</div>
+							<div className='normal-msg'>{message}</div>
 							<div className='signup_btn'>
 								<input
 									type='submit'
@@ -151,7 +228,9 @@ const Signup = () => {
 								/>
 								<p>
 									Already have an account ?{" "}
-									<a href='/'>Login</a>
+									<a href='/login' onClick={loginFunction}>
+										Login
+									</a>
 								</p>
 							</div>
 						</form>
