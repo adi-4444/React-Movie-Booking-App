@@ -26,7 +26,7 @@ const Signup = () => {
 		setName("");
 		setEmail("");
 		setUserId("");
-		setUserType("");
+		setUserType("CUSTOMER");
 		setPassword("");
 		setConfirmPassword("");
 		setMessage("");

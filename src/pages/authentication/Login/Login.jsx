@@ -24,6 +24,16 @@ function Login() {
 		setMessage("");
 		setValidateMessage("");
 	};
+	const loginDataChangeHandler = (e) => {
+		const name = e.target.name;
+		if (name === "userId") {
+			setUserId(e.target.value);
+		} else if (name === "password") {
+			setPassword(e.target.value);
+		}
+		setMessage("");
+		setValidateMessage("");
+	};
 	const signupFunction = () => {
 		clearStates();
 	};
@@ -50,11 +60,12 @@ function Login() {
 	const loginHandler = (e) => {
 		e.preventDefault();
 		const data = { userId, password };
-		console.log("Signin Clicked entered data" + data);
+		console.log("Signin Clicked entered data");
 
 		if (!validateData(data)) {
 			return;
 		}
+		console.log(data);
 	};
 	return (
 		<div className='login-body'>
@@ -65,14 +76,14 @@ function Login() {
 					<form onSubmit={loginHandler}>
 						<div className='form-group'>
 							<input
-								type='email'
+								type='text'
 								className='form-control'
-								name='email *'
-								placeholder='Email'
+								name='userId'
+								placeholder='userId'
 								autoFocus
 								required
 								value={userId}
-								onChange={(e) => setUserId(e.target.value)}
+								onChange={loginDataChangeHandler}
 							/>
 							<label className='form-label'>Email *</label>
 						</div>
@@ -85,7 +96,7 @@ function Login() {
 								placeholder='Password'
 								required
 								value={password}
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={loginDataChangeHandler}
 							/>
 							<label className='form-label'>Password *</label>
 						</div>
