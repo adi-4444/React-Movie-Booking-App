@@ -1,0 +1,5 @@
+export const USER_STATUS = {
+   APPROVED: "APPROVED",
+   PENDING: "PENDING",
+   REJECTED: "REJECTED"
+}

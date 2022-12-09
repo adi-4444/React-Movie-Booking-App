@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "../apis";
 
 const Signup = () => {
 	const [name, setName] = useState("");
@@ -10,7 +11,7 @@ const Signup = () => {
 	const [password, setPassword] = useState("");
 	const [confirmpassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState("");
-	const [validateMessage, setValidateMessage] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
 
 	const redirectUrl = () => {
@@ -30,7 +31,7 @@ const Signup = () => {
 		setPassword("");
 		setConfirmPassword("");
 		setMessage("");
-		setValidateMessage("");
+		setErrorMessage("");
 	};
 	const loginFunction = () => {
 		clearStates();
@@ -49,37 +50,37 @@ const Signup = () => {
 			setPassword(e.target.value);
 		}
 		setMessage("");
-		setValidateMessage("");
+		setErrorMessage("");
 	};
 	const validateData = (data) => {
 		if (data.userId.length < 5 || data.userId.length > 10) {
-			setValidateMessage("UserID should be 5 to 10 characters");
+			setErrorMessage("UserID should be 5 to 10 characters");
 			return false;
 		}
 		if (data.userId.includes(" ")) {
-			setValidateMessage("UserID should not contain spaces");
+			setErrorMessage("UserID should not contain spaces");
 			return false;
 		}
-		if (data.password.length < 6 || data.password.length > 10) {
-			setValidateMessage("Password should be 6 to 10 characters");
+		if (data.password.length < 6) {
+			setErrorMessage("Password should be more than 6 characters");
 			return false;
 		}
 		if (data.password.includes(" ")) {
-			setValidateMessage("Password should not contain spaces");
+			setErrorMessage("Password should not contain spaces");
 			return false;
 		}
 		if (data.name.length < 5 || data.password.length > 10) {
-			setValidateMessage("Username should be 5 to 10 characters");
+			setErrorMessage("Username should be 5 to 10 characters");
 			return false;
 		}
 		if (data.name.includes(" ")) {
-			setValidateMessage("Username should not contain spaces");
+			setErrorMessage("Username should not contain spaces");
 			return false;
 		}
 		return true;
 	};
 
-	const signupHandler = (e) => {
+	const signupHandler = async (e) => {
 		e.preventDefault();
 		const data = { name, email, userId, userType, password };
 
@@ -89,7 +90,12 @@ const Signup = () => {
 			return;
 		}
 		// api call to Signup a new user
-		console.log(data);
+		const response = await signUp(data);
+		if (response.status === 201) {
+			setMessage("Signup Successfull");
+		} else {
+			setErrorMessage(response.data.message);
+		}
 	};
 
 	return (
@@ -211,9 +217,7 @@ const Signup = () => {
 									""
 								)}
 							</div>
-							<div className='validate-msg'>
-								{validateMessage}
-							</div>
+							<div className='validate-msg'>{errorMessage}</div>
 							<div className='normal-msg'>{message}</div>
 							<div className='signup_btn'>
 								<input
