@@ -1,6 +1,7 @@
 import React from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
+import { logOut } from "../../../common/utils/helper";
 
 const Navbar = () => {
 	return (
@@ -35,7 +36,13 @@ const Navbar = () => {
 					</div>
 				</div>
 				<div className='items-div'>
-					<button>Login</button>
+					{localStorage.getItem("token") ? (
+						<button onClick={() => logOut()}>LogOut</button>
+					) : (
+						<button>
+							<Link to='/login'>Login</Link>
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

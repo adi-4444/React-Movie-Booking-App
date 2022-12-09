@@ -18,7 +18,7 @@ function Login() {
 			return;
 		}
 		if (userType === "CUSTOMER") {
-			navigate(-1);
+			navigate("/");
 		} else if (userType === "CLIENT") {
 			navigate("/client");
 		} else {
