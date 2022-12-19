@@ -17,10 +17,10 @@ const LandingPage = () => {
 		<div>
 			<Navbar />
 			<Slider />
-			{moviesList.map((movie) => {
+			{moviesList?.map((movie) => {
 				return (
 					<div>
-						<p>{movie.name}</p>
+						<p>Movie Name</p>
 					</div>
 				);
 			})}
