@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./landingpage.css";
 import Navbar from "./Navbar/Navbar";
 import Slider from "./Slider/Slider";
+import Movie from "./Movie/Movie";
 import { getAllMovies } from "./apis";
 const LandingPage = () => {
 	const [moviesList, setMoviesList] = useState([]);
@@ -24,6 +25,7 @@ const LandingPage = () => {
 					</div>
 				);
 			})}
+			<Movie />
 		</div>
 	);
 };
