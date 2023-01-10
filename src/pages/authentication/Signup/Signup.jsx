@@ -69,10 +69,6 @@ const Signup = () => {
 			setErrorMessage("Password should not contain spaces");
 			return false;
 		}
-		if (data.name.length < 5 || data.password.length > 10) {
-			setErrorMessage("Username should be 5 to 10 characters");
-			return false;
-		}
 		if (data.name.includes(" ")) {
 			setErrorMessage("Username should not contain spaces");
 			return false;

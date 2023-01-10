@@ -1,15 +1,15 @@
-.login-body {
+.login_body {
 	background-color: #f6f7f9;
-	height: 89.99vh;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.login-body > h1 {
+.login_body > h1 {
 	margin-bottom: 25px;
 }
 
-.login-wrapper {
+.login_wrapper {
 	background-color: #fff;
 	width: 350px;
 	padding: 15px 1px;
@@ -19,16 +19,16 @@
 	justify-content: center;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-.login-form-group > h2 {
+.login_form_group > h2 {
 	text-align: center;
 	margin: 1em;
 	transition: all 0.3s;
 }
-.form-group {
+.form_group {
 	margin-bottom: 1em;
 	transition: all 0.3s;
 }
-.form-label {
+.form_label {
 	font-size: 1em;
 	color: #aaa;
 	display: block;
@@ -38,7 +38,7 @@
 	transition: all 0.3s ease-in-out;
 	pointer-events: none;
 }
-.form-control {
+.form_control {
 	box-shadow: none;
 	background-color: rgba(0, 0, 0, 0.02);
 	border-radius: 0px;
@@ -50,32 +50,32 @@
 	padding: 5px;
 	caret-color: #f84464;
 }
-.form-control::placeholder {
+.form_control::placeholder {
 	color: transparent;
 }
-.form-control:focus {
+.form_control:focus {
 	box-shadow: none;
 	outline: none;
 	border-color: #f84464;
 }
-.form-control:focus + .form-label,
-.form-control:not(:placeholder-shown) + .form-label {
-	transform: translateY(-2.5em) scale(0.7);
+.form_control:focus + .form_label,
+.form_control:not(:placeholder-shown) + .form_label {
+	transform: translateY(-2.9em) scale(0.7);
 }
-.form-group:focus-within {
+.form_group:focus-within {
 	transform: scale(1.05, 1.05);
 }
-.validate-msg {
+.validate_msg {
 	color: red;
 	text-align: center;
 	margin-bottom: 5px;
 }
-.normal-msg {
+.normal_msg {
 	color: green;
 	text-align: center;
 	margin-bottom: 5px;
 }
-.login-btn > input {
+.login_btn > input {
 	width: 250px;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -83,18 +83,18 @@
 	border: none;
 	transition: all 0.5s ease-in-out;
 }
-.login-btn > input:hover {
+.login_btn > input:hover {
 	background-color: #f84464;
 	border-color: none;
 	cursor: pointer;
 	border: none;
 }
-.login-btn > p {
+.login_btn > p {
 	margin-top: 5px;
 	text-align: center;
 }
 
-.login-btn a {
+.login_btn a {
 	cursor: pointer;
 	color: blue;
 	text-decoration: none;

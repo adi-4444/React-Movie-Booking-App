@@ -51,7 +51,7 @@ function Login() {
 		clearStates();
 	};
 	const validateData = (data) => {
-		if (data.userId.length < 5 || data.userId.length > 10) {
+		if (data.userId.length < 5 || data.userId.length > 15) {
 			setErrorMessage("UserID will be 5 to 10 characters");
 			return false;
 		}
@@ -73,13 +73,14 @@ function Login() {
 	const loginHandler = async (e) => {
 		e.preventDefault();
 		const data = { userId, password };
-		console.log("Signin Clicked entered data");
 
 		if (!validateData(data)) {
 			return;
 		}
+		console.log("Login Clicked");
 		const result = await signIn(data);
-		if (result === 200) {
+		console.log(result);
+		if (result.status === 200) {
 			setMessage("Logged in successfully");
 			saveUserInfo(result.data);
 			redirectUrl();
@@ -87,16 +88,16 @@ function Login() {
 		setErrorMessage(result.data.message);
 	};
 	return (
-		<div className='login-body'>
+		<div className='login_body'>
 			<h1>Welcome</h1>
-			<div className='login-wrapper'>
-				<div className='login-form-group'>
+			<div className='login_wrapper'>
+				<div className='login_form_group'>
 					<h2>Login</h2>
 					<form onSubmit={loginHandler}>
-						<div className='form-group'>
+						<div className='form_group'>
 							<input
 								type='text'
-								className='form-control'
+								className='form_control'
 								name='userId'
 								placeholder='userId'
 								autoFocus
@@ -104,28 +105,28 @@ function Login() {
 								value={userId}
 								onChange={loginDataChangeHandler}
 							/>
-							<label className='form-label'>Email *</label>
+							<label className='form_label'>Email *</label>
 						</div>
 
-						<div className='form-group'>
+						<div className='form_group'>
 							<input
 								type='password'
-								className='form-control'
+								className='form_control'
 								name='password'
 								placeholder='Password'
 								required
 								value={password}
 								onChange={loginDataChangeHandler}
 							/>
-							<label className='form-label'>Password *</label>
+							<label className='form_label'>Password *</label>
 						</div>
-						<div className='validate-msg'>{errorMessage}</div>
-						<div className='normal-msg'>{message}</div>
-						<div className='login-btn'>
+						<div className='validate_msg'>{errorMessage}</div>
+						<div className='normal_msg'>{message}</div>
+						<div className='login_btn'>
 							<input type='submit' value='Login' />
 							<p>
 								Don't have an account ?{" "}
-								<Link to='/Signup' onClick={signupFunction}>
+								<Link to='/signup' onClick={signupFunction}>
 									Signup
 								</Link>
 							</p>

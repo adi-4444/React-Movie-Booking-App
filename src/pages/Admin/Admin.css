@@ -1,0 +1,17 @@
+.page-heading {
+	color: #333545;
+	text-align: center;
+}
+.stats-heading {
+	color: grey;
+	text-align: center;
+}
+.widget {
+	margin: 10px;
+}
+.stats-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}

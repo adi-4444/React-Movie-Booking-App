@@ -1,0 +1,29 @@
+.movie-data {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.movie-data a {
+	text-decoration: none;
+}
+.movie {
+	border: 1px solid grey;
+	margin: 5px;
+	padding: 10px;
+}
+.movie-image {
+	height: 400px;
+	width: 300px;
+	transition: all 300ms ease-in-out;
+}
+.movie-image:hover {
+	scale: 1.07;
+}
+.movie-title {
+	margin-top: 5px;
+	color: grey;
+}
+.movie-description {
+	color: rgb(162, 161, 161);
+}

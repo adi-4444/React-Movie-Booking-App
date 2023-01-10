@@ -1,6 +1,6 @@
 .signup_body {
 	background-color: #f6f7f9;
-	height: 89.99vh;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -58,7 +58,7 @@
 }
 .form_control:focus + .form_label,
 .form_control:not(:placeholder-shown) + .form_label {
-	transform: translateY(-2.5em) scale(0.7);
+	transform: translateY(-2.9em) scale(0.7);
 }
 .form_group:focus-within {
 	transform: scale(1.05, 1.05);

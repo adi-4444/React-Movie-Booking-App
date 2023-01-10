@@ -6,11 +6,13 @@ import Movie from "./Movie/Movie";
 import { getAllMovies } from "./apis";
 const LandingPage = () => {
 	const [moviesList, setMoviesList] = useState([]);
+	const [loading, isLoading] = useState(true);
 	const getData = async () => {
+		isLoading(true);
 		const result = await getAllMovies();
-		setMoviesList(result);
+		isLoading(false);
+		setMoviesList(result.data);
 	};
-	console.log(moviesList);
 	useEffect(() => {
 		getData();
 	}, []);
@@ -18,14 +20,7 @@ const LandingPage = () => {
 		<div>
 			<Navbar />
 			<Slider />
-			{moviesList?.map((movie) => {
-				return (
-					<div>
-						<p>Movie Name</p>
-					</div>
-				);
-			})}
-			<Movie />
+			<Movie loading={loading} moviesList={moviesList} />
 		</div>
 	);
 };
