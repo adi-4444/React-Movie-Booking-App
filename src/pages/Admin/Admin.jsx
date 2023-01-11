@@ -3,6 +3,10 @@ import Navbar from "../LandingPage/Navbar/Navbar";
 import "./Admin.css";
 import { CCol, CRow, CWidgetStatsC } from "@coreui/react";
 import { AiOutlinePieChart } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import MaterialTable from "@material-table/core";
+import { ExportCsv, ExportPdf } from "@material-table/exporters";
 
 const Admin = () => {
 	const [counterInfo, setCounterInfo] = useState({});
@@ -25,7 +29,7 @@ const Admin = () => {
 
 		setTheatersData(datafromAPI);
 
-		counterInfo.theater = datafromAPI.length;
+		counterInfo.theaters = datafromAPI.length;
 		setCounterInfo(counterInfo);
 	};
 
@@ -39,7 +43,7 @@ const Admin = () => {
 
 		setMoviesData(datafromAPI);
 
-		counterInfo.movie = datafromAPI.length;
+		counterInfo.movies = datafromAPI.length;
 		setCounterInfo(counterInfo);
 	};
 
@@ -53,7 +57,7 @@ const Admin = () => {
 
 		setUsersData(datafromAPI);
 
-		counterInfo.user = datafromAPI.length;
+		counterInfo.users = datafromAPI.length;
 		setCounterInfo(counterInfo);
 	};
 
@@ -61,6 +65,7 @@ const Admin = () => {
 		fetchTheatersData();
 		fetchMoviesData();
 		fetchUsersData();
+		// eslint-disable-next-line
 	}, []);
 	const showMovies = () => {
 		setShowMoviesTable(true);
@@ -79,6 +84,38 @@ const Admin = () => {
 		setShowTheaterTable(false);
 		setShowUsersTable(true);
 	};
+	const options = {
+		filtering: true,
+		sorting: true,
+		search: true,
+		paging: true,
+		pageSizeOptions: [5, 10, 20],
+		paginationSize: 3,
+		paginationType: "stepped",
+		headerStyle: {
+			backgroundColor: "#323545",
+			color: "white",
+			align: "center",
+			paddingLeft: "auto",
+			textAlign: "center",
+		},
+		rowStyle: {
+			backgroundColor: "#fff",
+		},
+		actionsColumnIndex: -1,
+		exportMenu: [
+			{
+				label: "Export PDF",
+				exportFunc: (cols, datas) =>
+					ExportPdf(cols, datas, "Tickets CRM"),
+			},
+			{
+				label: "Export CSV",
+				exportFunc: (cols, datas) =>
+					ExportCsv(cols, datas, "Tickets CRM"),
+			},
+		],
+	};
 	return (
 		<div>
 			<Navbar />
@@ -91,14 +128,14 @@ const Admin = () => {
 					<CRow className='stats-row'>
 						<CCol xs={3}>
 							<CWidgetStatsC
-								className='mb-3'
+								className='widget mb-3'
 								icon={<AiOutlinePieChart size={30} />}
 								color='primary'
 								inverse
 								progress={{ value: counterInfo.theater }}
 								text='Number of Theaters'
 								title='Theaters'
-								value={counterInfo.theater}
+								value={counterInfo.theaters}
 								onClick={() => showTheaters()}
 							/>
 						</CCol>
@@ -131,9 +168,108 @@ const Admin = () => {
 					</CRow>
 				</div>
 				<div>
-					{showTheaterTable && <h1>Theater Table</h1>}
-					{showMoviesTable && <h1>Movies Table</h1>}
-					{showUsersTable && <h1>Users Table</h1>}
+					{showTheaterTable && (
+						<div className='tables'>
+							<MaterialTable
+								title='THEATERS'
+								columns={[
+									{ title: "Theater Name", field: "name" },
+									{ title: "City", field: "city" },
+									{
+										title: "Descriptions",
+										field: "description",
+									},
+									{ title: "Pin Code", field: "pinCode" },
+								]}
+								actions={[
+									{
+										icon: AiFillEdit,
+										tooltip: "Edit Theater",
+										onClick: (event, rowData) => {
+											// Edit Function
+										},
+									},
+									{
+										icon: AiFillDelete,
+										tooltip: "Delete Theatre",
+										onClick: (event, rowData) => {
+											// Delete Function
+										},
+									},
+								]}
+								data={theatersData}
+								options={options}
+							/>
+						</div>
+					)}
+					{showMoviesTable && (
+						<div className='tables'>
+							<MaterialTable
+								title='MOVIES'
+								columns={[
+									{ title: "Movie Name", field: "name" },
+									{ title: "Director", field: "director" },
+									{
+										title: "Release Date",
+										field: "releaseDate",
+									},
+									{
+										title: "Release Status",
+										field: "releaseStatus",
+									},
+								]}
+								data={moviesData}
+								actions={[
+									{
+										icon: AiFillEdit,
+										tooltip: "Edit Theater",
+										onClick: (event, rowData) => {
+											// Edit Function
+										},
+									},
+									{
+										icon: AiFillDelete,
+										tooltip: "Delete Theatre",
+										onClick: (event, rowData) => {
+											// Delete Operation
+										},
+									},
+								]}
+								options={options}
+							/>
+						</div>
+					)}
+					{showUsersTable && (
+						<div className='tables'>
+							<MaterialTable
+								title='USERS'
+								columns={[
+									{ title: "USER ID", field: "userId" },
+									{ title: "Name", field: "name" },
+									{ title: "Email", field: "email" },
+									{ title: "Role", field: "userType" },
+								]}
+								data={usersData}
+								actions={[
+									{
+										icon: AiFillEdit,
+										tooltip: "Edit Theater",
+										onClick: (event, rowData) => {
+											// Edit Function
+										},
+									},
+									{
+										icon: AiFillDelete,
+										tooltip: "Delete Theatre",
+										onClick: (event, rowData) => {
+											// Delete Function
+										},
+									},
+								]}
+								options={options}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

@@ -8,10 +8,20 @@
 }
 .widget {
 	margin: 10px;
+	cursor: pointer;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 .stats-row {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
+}
+.tables {
+	width: 80%;
+	margin-top: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
