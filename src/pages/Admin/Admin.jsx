@@ -7,6 +7,8 @@ import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import MaterialTable from "@material-table/core";
 import { ExportCsv, ExportPdf } from "@material-table/exporters";
+import { getTheaters } from "../../common/apis/Theaters/Index";
+import { getMovies } from "../../common/apis/Movies";
 
 const Admin = () => {
 	const [counterInfo, setCounterInfo] = useState({});
@@ -19,31 +21,28 @@ const Admin = () => {
 	const [showMoviesTable, setShowMoviesTable] = useState(false);
 	const [showUsersTable, setShowUsersTable] = useState(false);
 
-	const fetchTheatersData = () => {
+	const fetchTheatersData = async () => {
 		//make an api call
+		const theatersData = await getTheaters();
+		const theaters = theatersData.data;
 		//fetch list of theaters
 		//update the theaters state
 		//update the counterInfo state
-
-		const datafromAPI = [];
-
-		setTheatersData(datafromAPI);
-
-		counterInfo.theaters = datafromAPI.length;
+		setTheatersData(theaters);
+		counterInfo.theaters = theaters.length;
 		setCounterInfo(counterInfo);
 	};
 
-	const fetchMoviesData = () => {
+	const fetchMoviesData = async () => {
 		//make an api call
 		//fetch list of movies
 		//update the movies state
 		//update the counterInfo state
-
-		const datafromAPI = [];
-
-		setMoviesData(datafromAPI);
-
-		counterInfo.movies = datafromAPI.length;
+		const datafromAPI = await getMovies();
+		const moviesData = datafromAPI.data;
+		setMoviesData(moviesData);
+		console.log(moviesData);
+		counterInfo.movies = moviesData.length;
 		setCounterInfo(counterInfo);
 	};
 
@@ -52,11 +51,8 @@ const Admin = () => {
 		//fetch list of users
 		//update the users state
 		//update the counterInfo state
-
 		const datafromAPI = [];
-
 		setUsersData(datafromAPI);
-
 		counterInfo.users = datafromAPI.length;
 		setCounterInfo(counterInfo);
 	};
@@ -172,6 +168,7 @@ const Admin = () => {
 						<div className='tables'>
 							<MaterialTable
 								title='THEATERS'
+								getRowId={(row) => row._id}
 								columns={[
 									{ title: "Theater Name", field: "name" },
 									{ title: "City", field: "city" },
@@ -206,6 +203,7 @@ const Admin = () => {
 						<div className='tables'>
 							<MaterialTable
 								title='MOVIES'
+								getRowId={(row) => row._id}
 								columns={[
 									{ title: "Movie Name", field: "name" },
 									{ title: "Director", field: "director" },
@@ -243,6 +241,7 @@ const Admin = () => {
 						<div className='tables'>
 							<MaterialTable
 								title='USERS'
+								getRowId={(row) => row._id}
 								columns={[
 									{ title: "USER ID", field: "userId" },
 									{ title: "Name", field: "name" },
