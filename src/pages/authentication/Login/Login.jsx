@@ -51,8 +51,8 @@ function Login() {
 		clearStates();
 	};
 	const validateData = (data) => {
-		if (data.userId.length < 5 || data.userId.length > 15) {
-			setErrorMessage("UserID will be 5 to 10 characters");
+		if (data.userId.length < 4 || data.userId.length > 15) {
+			setErrorMessage("UserID will be 4 to 10 characters");
 			return false;
 		}
 		if (data.userId.includes(" ")) {

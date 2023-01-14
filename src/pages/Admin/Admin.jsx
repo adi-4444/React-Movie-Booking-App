@@ -9,6 +9,7 @@ import MaterialTable from "@material-table/core";
 import { ExportCsv, ExportPdf } from "@material-table/exporters";
 import { getTheaters } from "../../common/apis/Theaters/Index";
 import { getMovies } from "../../common/apis/Movies";
+import { getUsers } from "../../common/apis/Users";
 
 const Admin = () => {
 	const [counterInfo, setCounterInfo] = useState({});
@@ -29,7 +30,7 @@ const Admin = () => {
 		//update the theaters state
 		//update the counterInfo state
 		setTheatersData(theaters);
-		counterInfo.theaters = theaters.length;
+		counterInfo.theaters = theaters?.length;
 		setCounterInfo(counterInfo);
 	};
 
@@ -41,19 +42,19 @@ const Admin = () => {
 		const datafromAPI = await getMovies();
 		const moviesData = datafromAPI.data;
 		setMoviesData(moviesData);
-		console.log(moviesData);
-		counterInfo.movies = moviesData.length;
+		counterInfo.movies = moviesData?.length;
 		setCounterInfo(counterInfo);
 	};
 
-	const fetchUsersData = () => {
+	const fetchUsersData = async () => {
 		//make an api call
 		//fetch list of users
 		//update the users state
 		//update the counterInfo state
-		const datafromAPI = [];
-		setUsersData(datafromAPI);
-		counterInfo.users = datafromAPI.length;
+		const datafromAPI = await getUsers();
+		const users = datafromAPI.data;
+		setUsersData(users);
+		counterInfo.users = users?.length;
 		setCounterInfo(counterInfo);
 	};
 
