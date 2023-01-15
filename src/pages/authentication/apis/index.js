@@ -6,7 +6,7 @@ export const signIn = async (user) => {
       const response = await AxiosInstance.post(URL, user)
       return response
    } catch (error) {
-      return error.message
+      return error
    }
 }
 export const signUp = async (user) => {
@@ -15,6 +15,6 @@ export const signUp = async (user) => {
       const response = await AxiosInstance.post(URL, user)
       return response
    } catch (error) {
-      return error.message
+      return error
    }
 }

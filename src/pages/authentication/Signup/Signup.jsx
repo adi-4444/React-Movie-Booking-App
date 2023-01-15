@@ -90,7 +90,7 @@ const Signup = () => {
 		if (response.status === 201) {
 			setMessage("Signup Successfull");
 		} else {
-			setErrorMessage(response.data.message);
+			setErrorMessage(response.response.data.message);
 		}
 	};
 

@@ -79,13 +79,12 @@ function Login() {
 		}
 		console.log("Login Clicked");
 		const result = await signIn(data);
-		console.log(result);
+
 		if (result.status === 200) {
 			setMessage("Logged in successfully");
 			saveUserInfo(result.data);
 			redirectUrl();
-		}
-		setErrorMessage(result.data.message);
+		} else setErrorMessage(result.response.data.message);
 	};
 	return (
 		<div className='login_body'>
@@ -105,7 +104,7 @@ function Login() {
 								value={userId}
 								onChange={loginDataChangeHandler}
 							/>
-							<label className='form_label'>Email *</label>
+							<label className='form_label'>User ID *</label>
 						</div>
 
 						<div className='form_group'>
