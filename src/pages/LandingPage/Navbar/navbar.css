@@ -20,6 +20,9 @@ a {
 	font-size: 2rem;
 	font-weight: bold;
 }
+.logo-div > a:hover {
+	color: #f84464;
+}
 .search-div {
 	display: flex;
 	align-items: center;

@@ -23,22 +23,14 @@ const Admin = () => {
 	const [showUsersTable, setShowUsersTable] = useState(false);
 
 	const fetchTheatersData = async () => {
-		//make an api call
 		const theatersData = await getTheaters();
 		const theaters = theatersData.data;
-		//fetch list of theaters
-		//update the theaters state
-		//update the counterInfo state
 		setTheatersData(theaters);
 		counterInfo.theaters = theaters?.length;
 		setCounterInfo(counterInfo);
 	};
 
 	const fetchMoviesData = async () => {
-		//make an api call
-		//fetch list of movies
-		//update the movies state
-		//update the counterInfo state
 		const datafromAPI = await getMovies();
 		const moviesData = datafromAPI.data;
 		setMoviesData(moviesData);
@@ -47,10 +39,6 @@ const Admin = () => {
 	};
 
 	const fetchUsersData = async () => {
-		//make an api call
-		//fetch list of users
-		//update the users state
-		//update the counterInfo state
 		const datafromAPI = await getUsers();
 		const users = datafromAPI.data;
 		setUsersData(users);
