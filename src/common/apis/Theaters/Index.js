@@ -9,3 +9,17 @@ export const getTheaters = async () => {
       return error
    }
 }
+
+export const removeTheater = async (theatres) => {
+   const URL = `/mba/api/v1/theatres/${theatres._id}`
+   try {
+      const response = await AxiosInstance.delete(URL, {
+         headers: {
+            "x-access-token": localStorage.getItem("token")
+         }
+      })
+      return response
+   } catch (error) {
+      return error
+   }
+}

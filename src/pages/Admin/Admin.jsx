@@ -7,8 +7,8 @@ import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import MaterialTable from "@material-table/core";
 import { ExportCsv, ExportPdf } from "@material-table/exporters";
-import { getTheaters } from "../../common/apis/Theaters/Index";
-import { getMovies } from "../../common/apis/Movies";
+import { getTheaters, removeTheater } from "../../common/apis/Theaters";
+import { getMovies, removeMovie } from "../../common/apis/Movies";
 import { getUsers } from "../../common/apis/Users";
 
 const Admin = () => {
@@ -68,6 +68,14 @@ const Admin = () => {
 		setShowMoviesTable(false);
 		setShowTheaterTable(false);
 		setShowUsersTable(true);
+	};
+	const deleteMovie = async (movie) => {
+		await removeMovie(movie);
+		fetchMoviesData();
+	};
+	const deleteTheater = async (theater) => {
+		await removeTheater(theater);
+		fetchTheatersData();
 	};
 	const options = {
 		filtering: true,
@@ -179,7 +187,7 @@ const Admin = () => {
 										icon: AiFillDelete,
 										tooltip: "Delete Theatre",
 										onClick: (event, rowData) => {
-											// Delete Function
+											deleteTheater(rowData);
 										},
 									},
 								]}
@@ -211,14 +219,14 @@ const Admin = () => {
 										icon: AiFillEdit,
 										tooltip: "Edit Theater",
 										onClick: (event, rowData) => {
-											// Edit Function
+											//Edit
 										},
 									},
 									{
 										icon: AiFillDelete,
 										tooltip: "Delete Theatre",
 										onClick: (event, rowData) => {
-											// Delete Operation
+											deleteMovie(rowData);
 										},
 									},
 								]}

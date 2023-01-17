@@ -1,0 +1,18 @@
+.player-wrapper {
+	display: flex;
+	height: 60vh;
+	align-items: center;
+	justify-content: center;
+}
+button {
+	background-color: #f84464;
+	color: #fff;
+	padding: 5px 15px;
+	border: none;
+	cursor: pointer;
+	border-radius: 10px;
+}
+button a {
+	text-decoration: none;
+	color: #fff;
+}
