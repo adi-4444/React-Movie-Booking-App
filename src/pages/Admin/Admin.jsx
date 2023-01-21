@@ -57,13 +57,11 @@ const Admin = () => {
 		setShowTheaterTable(false);
 		setShowUsersTable(false);
 	};
-
 	const showTheaters = () => {
 		setShowMoviesTable(false);
 		setShowTheaterTable(true);
 		setShowUsersTable(false);
 	};
-
 	const showUsers = () => {
 		setShowMoviesTable(false);
 		setShowTheaterTable(false);

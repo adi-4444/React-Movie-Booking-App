@@ -66,7 +66,9 @@ const MovieDetails = () => {
 							<div className='mx-3'>
 								{data.releaseStatus === "RELEASED" ? (
 									<button>
-										<Link to={`/buytickets/${data._id}`}>
+										<Link
+											to={`/buytickets/${data.name}/${data._id}`}
+										>
 											{" "}
 											Book Ticket
 										</Link>
