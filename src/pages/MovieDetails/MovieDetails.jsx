@@ -12,7 +12,6 @@ const MovieDetails = () => {
 	const getMovie = async () => {
 		const res = await getAMovie(id);
 		setData(res?.data);
-		console.log(res.data);
 	};
 	useEffect(() => {
 		getMovie();
