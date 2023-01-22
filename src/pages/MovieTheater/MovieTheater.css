@@ -4,3 +4,27 @@
 	text-align: center;
 	color: aliceblue;
 }
+.theatres-list a {
+	text-decoration: none;
+	color: rgb(57, 57, 57);
+}
+.a-theatre {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0.7rem;
+}
+.t-name {
+	width: 350px;
+}
+.m-ticket {
+	color: green;
+}
+.f-b {
+	color: #f84464;
+}
+.a-theatre:hover {
+	cursor: pointer;
+	background-color: lightgray;
+	border-radius: 5rem;
+}
