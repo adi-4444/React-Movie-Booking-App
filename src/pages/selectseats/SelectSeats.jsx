@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAMovie } from "../../common/apis/Movies";
 import { getATheater } from "../../common/apis/Theaters";
 import Navbar from "../LandingPage/Navbar/Navbar";
 import AllSeats from "./AllSeats/AllSeats";
+import Modal from "./Modal/Modal";
 import Seat from "./Seat/Seat";
 import "./SelectSeats.css";
 
@@ -11,12 +12,17 @@ const SelectSeats = () => {
 	const { movieId, theaterId } = useParams();
 	const [movieData, setMovieData] = useState({});
 	const [theatreData, setTheatreData] = useState({});
-	// console.log(movieData.data);
-	// console.log(theatreData.data);
+	const [selectedSeats, setSelectedSeats] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const navigate = useNavigate();
 	useEffect(() => {
 		getDetails();
+		const token = localStorage.getItem("token");
+		if (!token) {
+			navigate("/login");
+		}
 		// eslint-disable-next-line
-	}, []);
+	}, [navigate]);
 	const getDetails = async () => {
 		const movie = await getAMovie(movieId);
 		setMovieData(movie.data);
@@ -47,7 +53,18 @@ const SelectSeats = () => {
 				<div className='screen-wrapper d-flex justify-content-center align-items-center'>
 					<div className='screen'></div>
 				</div>
-				<AllSeats />
+				<AllSeats
+					setShowModal={setShowModal}
+					selectedSeats={selectedSeats}
+					setSelectedSeats={setSelectedSeats}
+				/>
+				<Modal
+					showModal={showModal}
+					movieData={movieData}
+					theatreData={theatreData}
+					setShowModal={setShowModal}
+					selectedSeats={selectedSeats}
+				/>
 			</div>
 		</div>
 	);

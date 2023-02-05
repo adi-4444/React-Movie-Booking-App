@@ -1,0 +1,8 @@
+.seat-select {
+	color: #f84464;
+}
+.proceed-btn {
+	background: #f84464;
+	cursor: pointer;
+	border-radius: 0.5rem;
+}

@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import { seats2dRepresentation } from "../../../common/utils/theratreSeats";
+import { TICKET_PRICE } from "../../../common/constants/seatData";
+import {
+	seats2dRepresentation,
+	getSeatNumber,
+} from "../../../common/utils/theratreSeats";
 import Seat from "../Seat/Seat";
 import "./AllSeats.css";
 
-const AllSeats = () => {
+const AllSeats = ({ setShowModal, selectedSeats, setSelectedSeats }) => {
 	const [seatState, setSeatState] = useState(seats2dRepresentation());
-
 	const handleSelectSeat = (rowIndex, columnIndex) => {
 		const currentStatus = seatState[rowIndex][columnIndex];
-		console.log(currentStatus);
+		const tempSelected = [...selectedSeats];
+		const seatNo = getSeatNumber(rowIndex, columnIndex);
 		let finalStatus = "";
 		if (currentStatus === "available") {
 			finalStatus = "selected";
+			tempSelected.push(seatNo);
 		} else if (currentStatus === "selected") {
 			finalStatus = "available";
+			const seatIndex = tempSelected.indexOf(seatNo);
+			tempSelected.splice(seatIndex, 1);
 		} else {
 			finalStatus = "occupied";
 		}
 		const temp = [...seatState];
 		temp[rowIndex][columnIndex] = finalStatus;
 		setSeatState(temp);
+		setSelectedSeats(tempSelected);
 	};
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column my-3'>
@@ -44,6 +52,28 @@ const AllSeats = () => {
 					})}
 				</div>
 			))}
+			{selectedSeats.length > 0 && (
+				<>
+					<div className='text-center p-3 my-2'>
+						<h5>
+							selected seats{" "}
+							<span className='seat-select'>
+								{selectedSeats.length}
+							</span>
+							. Price is{" "}
+							<span className='seat-select'>
+								₹ {TICKET_PRICE * selectedSeats.length}
+							</span>
+						</h5>
+					</div>
+					<button
+						className='proceed-btn'
+						onClick={() => setShowModal(true)}
+					>
+						Proceed to Payment
+					</button>
+				</>
+			)}
 		</div>
 	);
 };
