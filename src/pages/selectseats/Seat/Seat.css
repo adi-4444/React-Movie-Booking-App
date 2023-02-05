@@ -1,0 +1,16 @@
+.seat {
+	width: 25px;
+	height: 20px;
+	background-color: gray;
+	border-top-right-radius: 40%;
+	border-top-left-radius: 40%;
+	margin: 0.2rem 0.8rem;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: red;
+}
+.occupied {
+	background-color: #fff;
+}

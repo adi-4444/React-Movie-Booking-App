@@ -1,0 +1,23 @@
+.select-seats-wrapper {
+	background: url("../../assets/bgs.jpg");
+	color: white;
+	height: 92.44vh;
+}
+.seats-guide {
+	background: #323545;
+	display: flex;
+	padding: 0.5rem 1rem;
+	width: -moz-fit-content;
+	width: fit-content;
+	justify-content: space-between;
+	align-items: center;
+	margin: 2rem auto;
+	gap: 2rem;
+}
+.screen {
+	height: 130px;
+	width: 300px;
+	background-color: #fff;
+	transform: rotateX(-30deg) scale(1.1);
+	box-shadow: 0 3px 10px 2px;
+}
