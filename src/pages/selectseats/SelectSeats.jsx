@@ -5,8 +5,12 @@ import { getATheater } from "../../common/apis/Theaters";
 import Navbar from "../LandingPage/Navbar/Navbar";
 import AllSeats from "./AllSeats/AllSeats";
 import Modal from "./Modal/Modal";
+import Payments from "./payment/Payments";
 import Seat from "./Seat/Seat";
 import "./SelectSeats.css";
+import { CreateNewBooking } from "../../common/apis/booking/booking";
+import { makePayment } from "../../common/apis/payments/payments";
+import { SEATS_OCCUPIED, TICKET_PRICE } from "../../common/constants/seatData";
 
 const SelectSeats = () => {
 	const { movieId, theaterId } = useParams();
@@ -14,6 +18,10 @@ const SelectSeats = () => {
 	const [theatreData, setTheatreData] = useState({});
 	const [selectedSeats, setSelectedSeats] = useState([]);
 	const [showModal, setShowModal] = useState(false);
+	const [showConfirmModal, setShowConfirmModal] = useState(false);
+	const [bookingDetail, setBookingDetail] = useState({});
+	const [paymentDetail, setPaymentDetail] = useState({});
+	const [occupiedSeats, setOccupiedSeats] = useState(SEATS_OCCUPIED);
 	const navigate = useNavigate();
 	useEffect(() => {
 		getDetails();
@@ -28,6 +36,43 @@ const SelectSeats = () => {
 		setMovieData(movie.data);
 		const theatre = await getATheater(theaterId);
 		setTheatreData(theatre.data);
+	};
+
+	const createBooking = async () => {
+		const bookingData = {
+			movieId,
+			theatreId: theaterId,
+			noOfSeats: selectedSeats.length,
+			timing: new Date().toLocaleString(),
+		};
+		const res = await CreateNewBooking(bookingData);
+		const { data, status } = res;
+		if (status === 201) {
+			setBookingDetail(data);
+			setShowModal(true);
+		}
+	};
+	const confirmBooking = async () => {
+		const bookingData = {
+			bookingId: bookingDetail._id,
+			amount: TICKET_PRICE * selectedSeats.length,
+		};
+		const res = await makePayment(bookingData);
+		const { data, status } = res;
+		if (status === 201) {
+			setPaymentDetail(data);
+			setShowModal(false);
+			setShowConfirmModal(true);
+		}
+	};
+	const handlePostPayment = () => {
+		setShowConfirmModal(false);
+		const tempOccupied = [...occupiedSeats];
+		selectedSeats.forEach((seat) => {
+			tempOccupied.push(seat);
+		});
+		setOccupiedSeats(tempOccupied);
+		setSelectedSeats([]);
 	};
 
 	return (
@@ -57,6 +102,8 @@ const SelectSeats = () => {
 					setShowModal={setShowModal}
 					selectedSeats={selectedSeats}
 					setSelectedSeats={setSelectedSeats}
+					createBooking={createBooking}
+					occupiedSeats={occupiedSeats}
 				/>
 				<Modal
 					showModal={showModal}
@@ -64,6 +111,15 @@ const SelectSeats = () => {
 					theatreData={theatreData}
 					setShowModal={setShowModal}
 					selectedSeats={selectedSeats}
+					confirmBooking={confirmBooking}
+				/>
+				<Payments
+					showConfirmModal={showConfirmModal}
+					movieData={movieData}
+					theatreData={theatreData}
+					selectedSeats={selectedSeats}
+					paymentDetail={paymentDetail}
+					handlePostPayment={handlePostPayment}
 				/>
 			</div>
 		</div>

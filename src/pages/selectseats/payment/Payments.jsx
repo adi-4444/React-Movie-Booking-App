@@ -1,5 +1,5 @@
 import React from "react";
-import "./Modal.css";
+import "./Payments.css";
 import {
 	CButton,
 	CModal,
@@ -9,27 +9,34 @@ import {
 	CModalTitle,
 } from "@coreui/react";
 import { TICKET_PRICE } from "../../../common/constants/seatData";
+import confirm from "../../../assets/simpson.gif";
 
-const Modal = ({
-	showModal,
-	setShowModal,
+const Payments = ({
+	showConfirmModal,
 	selectedSeats,
 	movieData,
 	theatreData,
-	confirmBooking,
+	handlePostPayment,
+	paymentDetail,
 }) => {
 	return (
 		<div>
 			<CModal
 				alignment='center'
-				visible={showModal}
-				onClose={() => setShowModal(false)}
+				visible={showConfirmModal}
+				onClose={handlePostPayment}
 				backdrop='static'
 			>
 				<CModalHeader>
-					<CModalTitle>Confirm Your Booking Details</CModalTitle>
+					<CModalTitle>
+						Congratulations, Booking Confirmed !!!
+					</CModalTitle>
+					<div>
+						<img src={confirm} alt='bruhhh' />
+					</div>
 				</CModalHeader>
 				<CModalBody>
+					<h5>Booking id : {paymentDetail.bookingId}</h5>
 					<h5>Movie Name : {movieData.name}</h5>
 					<h5>Theatre Name : {theatreData.name}</h5>
 					<h5>
@@ -39,14 +46,8 @@ const Modal = ({
 					<h5>Total Price : {selectedSeats.length * TICKET_PRICE}</h5>
 				</CModalBody>
 				<CModalFooter>
-					<CButton
-						color='secondary'
-						onClick={() => setShowModal(false)}
-					>
-						Cancel
-					</CButton>
-					<CButton className='confirm-btn' onClick={confirmBooking}>
-						Confirm
+					<CButton color='secondary' onClick={handlePostPayment}>
+						Close
 					</CButton>
 				</CModalFooter>
 			</CModal>
@@ -54,4 +55,4 @@ const Modal = ({
 	);
 };
 
-export default Modal;
+export default Payments;

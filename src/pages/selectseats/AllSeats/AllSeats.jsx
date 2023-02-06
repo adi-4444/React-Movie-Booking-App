@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TICKET_PRICE } from "../../../common/constants/seatData";
 import {
 	seats2dRepresentation,
@@ -7,8 +7,19 @@ import {
 import Seat from "../Seat/Seat";
 import "./AllSeats.css";
 
-const AllSeats = ({ setShowModal, selectedSeats, setSelectedSeats }) => {
-	const [seatState, setSeatState] = useState(seats2dRepresentation());
+const AllSeats = ({
+	selectedSeats,
+	setSelectedSeats,
+	createBooking,
+	occupiedSeats,
+}) => {
+	const [seatState, setSeatState] = useState(
+		seats2dRepresentation(selectedSeats, occupiedSeats)
+	);
+	useEffect(() => {
+		const newState = seats2dRepresentation(selectedSeats, occupiedSeats);
+		setSeatState(newState);
+	}, [selectedSeats, occupiedSeats]);
 	const handleSelectSeat = (rowIndex, columnIndex) => {
 		const currentStatus = seatState[rowIndex][columnIndex];
 		const tempSelected = [...selectedSeats];
@@ -66,10 +77,7 @@ const AllSeats = ({ setShowModal, selectedSeats, setSelectedSeats }) => {
 							</span>
 						</h5>
 					</div>
-					<button
-						className='proceed-btn'
-						onClick={() => setShowModal(true)}
-					>
+					<button className='proceed-btn' onClick={createBooking}>
 						Proceed to Payment
 					</button>
 				</>

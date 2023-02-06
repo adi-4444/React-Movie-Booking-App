@@ -80,8 +80,6 @@ const Signup = () => {
 		e.preventDefault();
 		const data = { name, email, userId, userType, password };
 
-		console.log("Signin Clicked entered data");
-
 		if (!validateData(data)) {
 			return;
 		}

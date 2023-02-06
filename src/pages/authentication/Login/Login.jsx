@@ -77,7 +77,7 @@ function Login() {
 		if (!validateData(data)) {
 			return;
 		}
-		console.log("Login Clicked");
+
 		const result = await signIn(data);
 
 		if (result.status === 200) {
