@@ -2,9 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+currently this app is hosted on netlify [https://react-movie-booking.netlify.app/](https://react-movie-booking.netlify.app)
 
-In the project directory, you can run:
+## Used packages
+
+In the project we used material-table, coreui, react-player, react-icons
+
+### to run project locally
+
+clone this repo and go to cloned folder and type `npm install` to install all packages
 
 ### `npm start`
 
