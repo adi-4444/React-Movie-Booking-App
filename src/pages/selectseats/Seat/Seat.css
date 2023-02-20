@@ -1,7 +1,7 @@
 .seat {
 	width: 25px;
 	height: 20px;
-	background-color: gray;
+	background-color: #e9e7e7;
 	border-top-right-radius: 40%;
 	border-top-left-radius: 40%;
 	margin: 0.2rem 0.8rem;
@@ -12,5 +12,5 @@
 	background-color: #f84464;
 }
 .occupied {
-	background-color: #fff;
+	background-color: rgb(88, 87, 87);
 }
